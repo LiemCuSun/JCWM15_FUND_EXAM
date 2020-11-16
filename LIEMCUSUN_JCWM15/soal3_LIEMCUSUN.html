@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JAWABAN NO 3</title>
+    <style id="Table_Product">
+        table,
+        tr,
+        td,
+        th {
+            border: 1px solid black;
+            border-collapse: separate;
+            background-color: #53e237;
+            width: auto;
+        }
+
+        th,
+        td {
+            padding: 10px;
+        }
+
+        td {
+            text-align: center;
+            background-color: #ffffff
+        }
+
+        body {
+            background-color: #ffffff;
+        }
+
+        button {
+            padding: 2px 20px;
+        }
+    </style>
+</head>
+
+<body style="background-color:rgb(255, 255, 255)">
+    <h1>FORM USERS</h1>
+    <form id="user-baru">
+        <input type="text" id="name" placeholder="username">
+        <input type="text" id="email" placeholder="email">
+        <select id="ROLE">
+            <option value="admin">admin</option>
+            <option value="user">user</option>
+        </select><br><br>
+        <button id="AddUser">ADD USER</button>
+    </form>
+
+    <h1>USERS DATA</h1>
+    <table id="daftar-user">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+</body>
+<script id="Database">
+    // create database
+    let dataUser = [
+        {
+            id: 1,
+            name: "alee",
+            email: "alee@gmail.com",
+            role: "admin",
+        },
+        {
+            id: 2,
+            name: "jennie",
+            email: "jenniebp@gmail.com",
+            role: "user",
+        },
+        {
+            id: 3,
+            name: "elsa",
+            email: "elsa@disney",
+            role: "user",
+        }
+    ]
+
+    let userReg = []
+
+    // class untuk bikin object produk
+    class User {
+        constructor(id, name, email, role) {
+            this.id = id,
+                this.name = name,
+                this.email = email,
+                this.role = role
+        }
+    }
+
+</script>
+<script id="USER_DATA">
+    // menampilkan data ke table => access table
+    function ShowUser(index) {
+        console.log("index", index)
+        let table = document.getElementById("daftar-user")
+        console.log(table)
+
+        let tbody = table.getElementsByTagName("tbody")[0]
+        console.log(tbody)
+
+        let tr = ""
+        for (let i = 0; i < dataUser.length; i++) {
+            if (index === i) {
+                tr += `
+                <tr>
+                <td>#</td>
+                <td>
+                <input id="edit-nama" type="text" value="${dataUser[i].name}">
+                </td>
+                <td>
+                <input id="edit-email" type="text" value="${dataUser[i].email}">
+                </td>
+                <td>
+                <input id="edit-role" type="text" value="${dataUser[i].role}">
+                </td>
+                <td>
+                <button onclick="OnButtonSave(${i})">SAVE</button>
+                <button onclick="OnButtonCancel()">CANCEL</button>
+                </td>
+                </tr>`
+            } else {
+                tr += `
+                <tr>
+                    <td>${i + 1}</td>
+                    <td>${dataUser[i].name}</td>
+                    <td>${dataUser[i].email}</td>
+                    <td>${dataUser[i].role}</td>
+                    <td>
+                        <button onclick="OnButtonDelete(${i})">DELETE</button>
+                        <button onclick="OnButtonEdit(${i})">EDIT</button>
+                    </td>
+                </tr>
+            `
+            }
+        }
+        tbody.innerHTML = tr
+    }
+    ShowUser()
+
+    // add new produk saat button add di klik
+    // dataProduk.push(new Produk(dataProduk.length + 1, "Samsung Galaxy Fold 2", "https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-z-fold2-5g-2.jpg", 29000000, 2))
+    // console.log(dataProduk)
+    // ShowProducts()
+
+    document.getElementById("AddUser").addEventListener("click", function (event) {
+        event.preventDefault()
+
+        
+        console.log("add button di klik")
+
+
+        // get input value
+        let form = document.getElementById("user-baru")
+        console.log(form)
+        document.getElementById("ROLE").value
+
+
+        // check input value => tidak boleh ada value yang kosong
+        // check value dari harga dan stok tidak boleh < 0 atau negatif
+        let nama = form["name"].value
+        let email = form["email"].value
+        document.getElementById("ROLE").value
+
+        if (nama === "" || email === "") {
+            alert("input tidak boleh kosong")
+        } else {
+            // masukan semua value ke daftar produk dalam bentuk object
+            dataUser.push(new User(
+                dataUser.length + 1,
+                nama,
+                email,
+                document.getElementsByTagName("select")[0].value
+            ))
+
+            // tampilkan ulang produk
+            ShowUser()
+        }
+    })
+
+    // ShowProducts()
+    function OnButtonDelete(index) {
+            console.log(`button index ke-${index} di klik`)
+
+            // delete produk
+            dataUser.splice(index, 1)
+
+            // tampikan ulang produk
+            ShowUser()
+        }
+
+    // edit produk
+    function OnButtonEdit(index) {
+            console.log(`button edit index ke-${index}`)
+
+            // tampilkan table
+            ShowUser(index)
+        }
+
+    // save edited produk
+    function OnButtonSave(index) {
+            console.log("button save di klik")
+
+            // get value dari input data yang mau di edit
+            let editNama = document.getElementById("edit-nama").value
+            let editEmail = document.getElementById("edit-email").value
+            let editRole = document.getElementById("edit-role").value
+
+            // edit daftar produk dengan value baru
+            dataUser[index].name = editNama
+            dataUser[index].email = editEmail
+            dataUser[index].role = editRole
+
+
+            // tampilkan ulang table produk
+            ShowUser()
+        }
+
+    // cancel edit
+    function OnButtonCancel() {
+            console.log("button cancel di klik")
+
+            // tampilkan ulang table produk
+            ShowUser()
+        }
+</script>
+
+</html>

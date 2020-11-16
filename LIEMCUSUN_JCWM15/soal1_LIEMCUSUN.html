@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JAWABAN SOAL 1</title>
+</head>
+<h1>PATTERN</h1>
+
+<body>
+    <input type="number" placeholder="masukan angka" id="inputUser"><br><br>
+    <button onclick="OnButtonGanjil()" id="GANJIL">GANJIL</button>
+    <button onclick="OnButtonHuruf()" id="HURUF">HURUF</button> <br><br>
+    <h1>RESULT</h1> <br><br>
+    <h1 id="RESULT"></h1>
+</body>
+<script>
+
+    let searchinput = document.getElementById("inputUser")
+    let result = document.getElementById("RESULT")
+
+    function OnButtonGanjil() {
+        let input = parseInt(searchinput.value)
+        console.log(input)
+
+        console.log("button ganjil executed")
+        let pattern = ""
+        if (input > 4) {
+            alert("INPUT MAKSIMAL 4")
+        } else if (isNaN(input)) {
+            alert("INPUT TIDAK BOLEH KOSONG")
+        } else if (input < 0) {
+            alert("INPUT TIDAK BOLEH NEGATIF")
+        } else {
+            for (let i = 0; i < input; i++) {
+                for (let j = 0; j < i; j++) {
+                    if (i == 1) {
+                        pattern += i + "&nbsp"
+                    } else if (i == 2) {
+                        pattern += i + 1 + j * 2 + "&nbsp"
+                    } else {
+                        pattern += i + 4 + j * 2 + "&nbsp"
+                    }
+
+                }
+                pattern += "<br>"
+            }
+        }
+        result.innerHTML = pattern
+    }
+
+    function OnButtonHuruf() {
+        let input = parseInt(searchinput.value)
+        console.log(input)
+
+        console.log("button huruf executed")
+        let pattern = ""
+        if (input > 4) {
+            alert("INPUT MAKSIMAL 4")
+        } else if (isNaN(input)) {
+            alert("INPUT TIDAK BOLEH KOSONG")
+        } else if (input < 0) {
+            alert("INPUT TIDAK BOLEH NEGATIF")
+        } else {
+            for (let i = 0; i < input; i++) {
+                for (let j = 0; j < i; j++) {
+                    if (i == 1) {
+                        pattern += "B" + "&nbsp"
+                    } else if (i == 2) {
+                        if (j < 1) {
+                        pattern += "D" + "&nbsp"
+                        } else {
+                            pattern += "F" + "&nbsp"
+                        }
+                    } else {
+                        if (j == 0) {
+                        pattern += "H" + "&nbsp"
+                        } else if (j == 1) {
+                            pattern += "J" + "&nbsp"
+                        } else {
+                            pattern += "L" + "&nbsp"
+                        }
+                    }
+
+                }
+                pattern += "<br>"
+            }
+        }
+        result.innerHTML = pattern
+    }
+</script>
+
+</html>

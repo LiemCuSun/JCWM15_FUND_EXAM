@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JAWABAN SOAL 2</title>
+</head>
+<h1>DERET FIBONANCI</h1>
+
+<body>
+    Masukan angka <input type="number" placeholder="masukan angka" id="inputUser"><br><br>
+    <button onclick="OnButtonShow()" id="SHOW">SHOW</button>
+    <button onclick="OnButtonGanjil()" id="GANJIL">GANJIL</button>
+    <button onclick="OnButtonGenap()" id="GENAP">GENAP</button> <br><br>
+    <h1>RESULT :</h1> <br><br>
+    <h1 id="RESULT"></h1>
+</body>
+<script>
+
+    let searchinput = document.getElementById("inputUser")
+    let result = document.getElementById("RESULT")
+
+    function OnButtonShow() {
+        let input = parseInt(searchinput.value)
+        console.log(input)
+
+        console.log("button ganjil executed")
+        let initialValue = 0
+        let currentValue = 1
+        let fibonanci = ""
+        console.log(initialValue)
+        console.log(currentValue)
+
+        while (true) {
+            // ** simpan old current value
+            let temp = currentValue
+
+            // ** update value
+            currentValue += initialValue
+            if (initialValue > 88) {
+                fibonanci += initialValue // ** artinya currentValue = currentValue + initialValue
+            } else {
+                fibonanci += initialValue + "," // ** artinya currentValue = currentValue + initialValue
+            }
+            initialValue = temp
+            // ** check value
+            if (currentValue - 45 > input) {
+                break
+            }
+            console.log(currentValue)
+        }
+        result.innerHTML = fibonanci
+    }
+
+    function OnButtonGanjil() {
+        let input = parseInt(searchinput.value)
+        console.log(input)
+
+        console.log("button ganjil executed")
+        let initialValue = 0
+        let currentValue = 1
+        let valueganjil = 0
+        let fibonanci = ""
+        console.log(initialValue)
+        console.log(currentValue)
+
+        while (true) {
+            // ** simpan old current value
+            let temp = currentValue
+
+            // ** update value
+            currentValue += initialValue
+            if (initialValue > 88) {
+                valueganjil += initialValue // ** artinya currentValue = currentValue + initialValue
+                fibonanci += initialValue + `= ${valueganjil}`
+            } else if (initialValue % 2 == 0) {
+                console.log("none")
+            } else {
+                fibonanci += initialValue + "+"
+                valueganjil += initialValue // ** artinya currentValue = currentValue + initialValue
+            }
+            initialValue = temp
+            // ** check value
+            if (currentValue - 45 > input) {
+                break
+            }
+            console.log(currentValue)
+        }
+        result.innerHTML = fibonanci
+    }
+
+    function OnButtonGenap() {
+        let input = parseInt(searchinput.value)
+        console.log(input)
+
+        console.log("button ganjil executed")
+        let initialValue = 0
+        let currentValue = 1
+        let valuegenap = 0
+        let fibonanci = ""
+        console.log(initialValue)
+        console.log(currentValue)
+
+        while (true) {
+            // ** simpan old current value
+            let temp = currentValue
+
+            // ** update value
+            currentValue += initialValue
+            if (valuegenap > 40) {
+                fibonanci += `= ${valuegenap}`
+                break// ** artinya currentValue = currentValue + initialValue
+            } else if (initialValue % 2 == 0) {
+                valuegenap += initialValue // ** artinya currentValue = currentValue + initialValue
+                if (initialValue > 30) {
+                    fibonanci += initialValue
+                } else {
+                    fibonanci += initialValue + "+"
+                }
+            } else {
+                console.log("none")
+            }
+            initialValue = temp
+            // ** check value
+            if (currentValue - 45 > input) {
+                break
+            }
+            console.log(currentValue)
+        }
+        result.innerHTML = fibonanci
+    }
+
+
+
+</script>
+
+</html>
